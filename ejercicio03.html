@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Edad</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verificación de Edad</h1>
+
+    <!-- Botón para abrir el modal -->
+    <div class="text-center mt-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cylinderModal">
+            ver edad
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="cylinderModal" tabindex="-1" aria-labelledby="cylinderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cylinderModalLabel">Ingrese los datos del Cilindro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario dentro del modal -->
+                    <form id="formCilindro" onsubmit="return verificarEdad(event)">
+                        <label for="edadModal">Ingresa tu edad:</label>
+                        <input type="number" id="edadModal" name="edad" min="0" required>
+                        <button type="submit">Enviar</button>
+                    </form>
+
+                    <!-- Resultado del cálculo -->
+                    <div id="resultadoModal" class="alert alert-info mt-3 d-none"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p id="resultado" class="alert alert-info mt-3 d-none"></p>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        function verificarEdad(event) {
+            event.preventDefault(); // Evita que se recargue la página
+            let edad;
+            let resultado;
+
+            // Verifica cuál formulario se envió
+            if (event.target.id === 'formCilindro') {
+                edad = document.getElementById('edadModal').value;
+                resultado = document.getElementById('resultadoModal');
+            } else {
+                edad = document.getElementById('edad').value;
+                resultado = document.getElementById('resultado');
+            }
+
+            if (edad >= 18) {
+                resultado.textContent = 'Eres mayor de edad.';
+            } else {
+                resultado.textContent = 'Eres menor de edad.';
+            }
+
+            resultado.classList.remove('d-none'); // Muestra el resultado
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio 01</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center"> Cálculo del volumen de un cilindro</h2>
+
+         <!-- Botón para abrir el modal -->
+         <div class="text-center mt-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cylinderModal">
+                Calcular Volumen
+            </button>
+        </div>
+        <div class="modal fade" id="cylinderModal" tabindex="-1" aria-labelledby="cylinderModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cylinderModalLabel">Ingrese los datos del Cilindro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulario para ingresar altura y diametro-->
+         <form id="formCilindro">
+            <div class="mb-3">
+                <label for="" class="for-label">Altura del cilindro (cm)</label>
+                <input type="number" class="form-control" id="altura"
+                placeholder="Ingrese la altura del cilindro">
+            </div>
+            <div class="mb-3">
+                <label for="" class="for-label">Diámetro del cilindro</label>
+                <input type="number" class="form-control" id="diametro"
+                placeholder="Ingrese el diámetro del cilindro">
+            </div>
+            <!-- Boton para alcular el bolumen-->
+             <button type="submit" class="btn btn-outline-success">Calcular volumen</button>
+         </form>
+
+                        <!-- Resultado del cálculo -->
+                        <div id="resultado" class="alert alert-info mt-3 d-none"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+  
+     <script src="js/bootstrap.bundle.min.js" ></script>
+  
+     <script>
+        // Seleccion de elementos del DOM
+        const form=document.getElementById('formCilindro') ;
+        const resulDiv=document.getElementById('resultado');
+        //función para calcular el volumen del cilindro
+
+        form.addEventListener ('submit',(event)=>{
+        event.preventDefault();
+    
+            //Obtener valores de altura y diametro ingresados por el usuario
+
+            const altura=parseFloat(document.getElementById('altura').value);
+            const diametro=parseFloat(document.getElementById('diametro').value);
+            //validación de los valores ingresados
+            if (isNaN(altura)||isNaN(diametro)||altura<=0||diametro<=0)
+            {
+
+                alert('por favor ingrese valores válidos para la altura y el diametro');
+                return;
+            }
+
+            //Calcular el radio (mitad del diametro) y luego el volumen
+            const  radio=diametro/2;
+            const volumen=Math.PI*Math.pow(radio,2)*altura;
+
+            //Mostrar el resultado con dos decimales
+            resulDiv.textContent=`El volumen del cilindro es: ${volumen.toFixed
+            (2)}cm3 .`;
+            resulDiv.classList.remove('d-none')
+    
+            
+     } );
+     </script>
+
+
+</body>
+</html>

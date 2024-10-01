@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo del Área de un Triángulo Rectángulo</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Cálcular el Triángulo Rectángulo</h2>
+
+          <!-- Botón para abrir el modal -->
+          <div class="text-center mt-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cylinderModal">
+                Calcular
+        </div>
+        <div class="modal fade" id="cylinderModal" tabindex="-1" aria-labelledby="cylinderModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cylinderModalLabel">Ingrese los datos del Cilindro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+          <!-- Formulario para ingresar base y altura-->
+        <form id="formCilindro">
+            <div class="mb-3">
+                <label for="base" class="form-label">Ingrese la base</label>
+                <input type="number" class="form-control" id="base" placeholder="Ingrese la base del triángulo" required>
+            </div>
+            <div class="mb-3">
+                <label for="altura" class="form-label">Ingrese la altura</label>
+                <input type="number" class="form-control" id="altura" placeholder="Ingrese la altura del triángulo" required>
+            </div>
+            <!-- Botón para calcular-->
+            <button type="button" class="btn btn-success" onclick="calcular()">Calcular</button>
+        </form>
+
+                        <!-- Resultado del triangulo -->
+                        <div id="resultado" class="alert alert-info mt-3 d-none"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calcular() {
+            const base = parseFloat(document.getElementById('base').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            
+            if (isNaN(base) || isNaN(altura) || base <= 0 || altura <= 0) {
+                document.getElementById('resultado').textContent = 'Por favor, ingrese valores válidos para la base y la altura.';
+                document.getElementById('resultado').classList.remove('d-none');
+                return;
+            }
+
+            const area = (base * altura) / 2;
+            document.getElementById('resultado').textContent = `El área del triángulo rectángulo es: ${area}`;
+            document.getElementById('resultado').classList.remove('d-none');
+        }
+    </script>
+</body>
+</html>
